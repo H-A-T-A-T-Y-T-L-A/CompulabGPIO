@@ -20,4 +20,4 @@ class InputPin:
         if read_error:
             raise ValueError(f'GPIO {self.pin_group} {self.pin_number} read error:\n{read_error}')
 
-        return read_output == '1'
+        return read_output.strip() == '1'
