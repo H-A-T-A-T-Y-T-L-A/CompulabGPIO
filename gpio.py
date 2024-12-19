@@ -20,17 +20,17 @@ class Gpio:
         self.in1 = InputPin(IN1)
         self.in2 = InputPin(IN2)
         self.in3 = InputPin(IN3)
-        self.inputs = [self.in0, self.in1, self.in2, self.in3, self.in4]
+        self.inputs = [self.in0, self.in1, self.in2, self.in3]
 
         self.out0 = OutputPin(OUT0)
         self.out1 = OutputPin(OUT1)
         self.out2 = OutputPin(OUT2)
         self.out3 = OutputPin(OUT3)
-        self.inputs = [self.in0, self.in1, self.in2, self.in3, self.in4]
+        self.inputs = [self.in0, self.in1, self.in2, self.in3]
 
         self.inputs_to_scan:MutableSequence[InputPin] = []
 
-    def _register_scan(self, pin:'InputPin') -> None:
+    def register_scan(self, pin:'InputPin') -> None:
         if pin not in self.inputs_to_scan:
             self.inputs_to_scan.append(pin)
 
