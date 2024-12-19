@@ -1,10 +1,12 @@
-from typing import Tuple
+from typing import Tuple, Callable, Optional
 import subprocess
 
 class InputPin:
 
     def __init__(self, pin:Tuple[int, int]) -> None:
         self.pin_group, self.pin_number = pin
+        self.state:Optional[bool] = None
+        self.on_change:Callable[[], None] = lambda: None
 
     def get(self) -> bool:
         read_result = subprocess.run(
@@ -20,4 +22,9 @@ class InputPin:
         if read_error:
             raise ValueError(f'GPIO {self.pin_group} {self.pin_number} read error:\n{read_error}')
 
-        return read_output.strip() == '1'
+        result = read_output.strip() == '1'
+        if result != self.state:
+            self.on_change()
+
+        self.state = result
+        return self.state

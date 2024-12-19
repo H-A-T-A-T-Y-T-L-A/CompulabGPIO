@@ -1,7 +1,7 @@
 from typing import Tuple
 import subprocess
 
-class Pin:
+class OutputPin:
 
     def __init__(self, pin:Tuple[int, int]) -> None:
         self.pin_group, self.pin_number = pin
