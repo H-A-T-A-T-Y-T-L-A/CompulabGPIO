@@ -23,8 +23,8 @@ class InputPin:
             raise ValueError(f'GPIO {self.pin_group} {self.pin_number} read error:\n{read_error}')
 
         result = read_output.strip() == '1'
-        if result != self.state:
+        if result != self.state or self.state is None:
+            self.state = result
             self.on_change()
 
-        self.state = result
         return self.state
