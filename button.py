@@ -52,6 +52,7 @@ class Button:
         # if the button has been released
         if not self.pin.state:
             self._on_up()
+            self._click_start_time = None
         # if the button has been pressed and released faster than any long click setting
         if not self.pin.state and hold_time < self._min_long_click:
             self._on_click()
